@@ -27,6 +27,11 @@ test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
 jacocoTestReport {
     dependsOn test
     reports {
