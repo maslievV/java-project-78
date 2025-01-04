@@ -1,18 +1,18 @@
 package hexlet.code.schemas;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.function.Predicate;
 
-public class Schema {
-    protected static Map<CheckNames, Predicate<Object>> checks = new TreeMap<>();
+public class BaseSchema {
+    protected final Map<CheckNames, Predicate<Object>> checks = new LinkedHashMap<>();
     protected boolean required = false;
 
-    protected static void addCheck(CheckNames status, Predicate<Object> pr) {
+    protected final void addCheck(CheckNames status, Predicate<Object> pr) {
         checks.put(status, pr);
     }
 
-    public boolean isValid(Object value) {
+    public final boolean isValid(Object value) {
         if (!required) {
             Predicate<Object> validate = checks.get(CheckNames.REQUIRED);
             if (!validate.test(value)) {

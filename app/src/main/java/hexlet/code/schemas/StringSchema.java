@@ -2,11 +2,11 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public class StringSchema extends Schema {
+public final class StringSchema extends BaseSchema {
 
     public StringSchema() {
-        Predicate<Object> lambda = x -> x != null && !((String) x).isEmpty();
-        Schema.addCheck(CheckNames.REQUIRED, lambda);
+        Predicate<Object> lambda = x -> x instanceof String && !((String) x).isEmpty();
+        addCheck(CheckNames.REQUIRED, lambda);
     }
 
     public StringSchema required() {
@@ -16,13 +16,13 @@ public class StringSchema extends Schema {
 
     public StringSchema minLength(int minLength) {
         Predicate<Object> lambda = x -> x == null || ((String) x).length() >= minLength;
-        Schema.addCheck(CheckNames.MIN_LENGTH, lambda);
+        addCheck(CheckNames.MIN_LENGTH, lambda);
         return this;
     }
 
     public StringSchema contains(String text) {
         Predicate<Object> lambda = x -> x == null || ((String) x).contains(text);
-        Schema.addCheck(CheckNames.CONTAINS, lambda);
+        addCheck(CheckNames.CONTAINS, lambda);
         return this;
     }
 }
