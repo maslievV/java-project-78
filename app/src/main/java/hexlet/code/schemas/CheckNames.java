@@ -6,5 +6,6 @@ public enum CheckNames {
     MIN_LENGTH,
     POSITIVE,
     IN_RANGE,
-    SIZE_OF
+    SIZE_OF,
+    SHAPE
 }

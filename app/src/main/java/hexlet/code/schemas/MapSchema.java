@@ -21,4 +21,12 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
+    public MapSchema shape(Map<Object, BaseSchema> schemas) {
+        Predicate<Object> lambda = m -> schemas.entrySet().stream()
+                        .allMatch(o -> o.getValue().isValid(((Map) m).get(o.getKey())));
+        addCheck(CheckNames.SHAPE, lambda);
+        return this;
+    }
+
+
 }
