@@ -5,5 +5,6 @@ public enum CheckNames {
     CONTAINS,
     MIN_LENGTH,
     POSITIVE,
-    IN_RANGE
+    IN_RANGE,
+    SIZE_OF
 }
