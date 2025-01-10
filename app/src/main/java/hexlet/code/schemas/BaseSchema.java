@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
-public class BaseSchema<T> {
+public abstract class BaseSchema<T> {
     private final Map<String, Predicate<Object>> checks = new TreeMap<>();
 
     protected final void addCheck(String status, Predicate pr) {
