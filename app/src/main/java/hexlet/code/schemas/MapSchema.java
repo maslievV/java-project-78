@@ -16,13 +16,13 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema sizeOf(int limit) {
+    public MapSchema sizeof(int limit) {
         Predicate<Map> lambda = m -> m == null || m.size() == limit;
-        addCheck("sizeOf", lambda);
+        addCheck("sizeof", lambda);
         return this;
     }
 
-    public MapSchema shape(Map<Object, BaseSchema> schemas) {
+    public MapSchema shape(Map<String, BaseSchema> schemas) {
         Predicate<Map> lambda = m -> schemas.entrySet().stream()
                         .allMatch(o -> o.getValue().isValid((m).get(o.getKey())));
         addCheck("shape", lambda);

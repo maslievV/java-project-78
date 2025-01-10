@@ -31,7 +31,7 @@ public class MapValidationTest {
         data.put("key1", 1);
         assertTrue(schema.isValid(data));
 
-        schema.sizeOf(2);
+        schema.sizeof(2);
 
         assertFalse(schema.isValid(data));
         data.put("key2", 2);
@@ -41,7 +41,7 @@ public class MapValidationTest {
     @Test
     public void shapeTest() {
         var schema = VALIDATOR.map();
-        Map<Object, BaseSchema> schemas = new HashMap<>();
+        Map<String, BaseSchema> schemas = new HashMap<>();
         schemas.put("firstname", VALIDATOR.string().required());
         schemas.put("lastname", VALIDATOR.string().required().minLength(2));
 
