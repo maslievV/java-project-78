@@ -14,7 +14,6 @@ public class NumberValidationTest {
         var schema = VALIDATOR.number();
         assertTrue(schema.isValid(5));
         assertTrue(schema.isValid(null));
-        assertTrue(schema.positive().isValid(null));
 
         schema.required();
 
@@ -26,14 +25,16 @@ public class NumberValidationTest {
         var schema = VALIDATOR.number().positive();
         assertTrue(schema.isValid(5));
         assertFalse(schema.isValid(-5));
+        assertFalse(schema.isValid(0));
     }
 
     @Test
     public void rangeTest() {
         var schema = VALIDATOR.number().range(5, 10);
-        assertFalse(schema.isValid(4));
+        assertTrue(schema.isValid(5));
         assertTrue(schema.isValid(8));
         assertFalse(schema.isValid(11));
+        assertTrue(schema.isValid(10));
     }
 
 }

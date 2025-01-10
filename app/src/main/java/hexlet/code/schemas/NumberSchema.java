@@ -5,24 +5,25 @@ import java.util.function.Predicate;
 public final class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
-        Predicate<Object> lambda = n -> n instanceof Integer;
-        addCheck(CheckNames.REQUIRED, lambda);
+        Predicate<Integer> lambda = n -> n == null || n instanceof Integer;
+        addCheck("required", lambda);
     }
 
     public NumberSchema required() {
-        required = true;
+        Predicate<Integer> lambda = n -> n != null;
+        addCheck("required", lambda);
         return this;
     }
 
     public NumberSchema positive() {
-        Predicate<Object> lambda = n -> ((int) n) > 0;
-        addCheck(CheckNames.POSITIVE, lambda);
+        Predicate<Integer> lambda = n -> n == null || n > 0;
+        addCheck("positive", lambda);
         return this;
     }
 
     public NumberSchema range(int begin, int end) {
-        Predicate<Object> lambda = n -> ((int) n) >= begin && ((int) n) <= end;
-        addCheck(CheckNames.IN_RANGE, lambda);
+        Predicate<Integer> lambda = n -> (n == null) || n >= begin && n <= end;
+        addCheck("inRange", lambda);
         return this;
     }
 }

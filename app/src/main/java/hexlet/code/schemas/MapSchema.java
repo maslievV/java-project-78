@@ -6,25 +6,26 @@ import java.util.function.Predicate;
 public class MapSchema extends BaseSchema {
 
     public MapSchema() {
-        Predicate<Object> lambda = m -> m instanceof Map;
-        addCheck(CheckNames.REQUIRED, lambda);
+        Predicate<Map> lambda = m -> m == null || m instanceof Map;
+        addCheck("required", lambda);
     }
 
     public MapSchema required() {
-        required = true;
+        Predicate<Map> lambda = m -> m != null;
+        addCheck("required", lambda);
         return this;
     }
 
     public MapSchema sizeOf(int limit) {
-        Predicate<Object> lambda = m -> ((Map) m).size() == limit;
-        addCheck(CheckNames.SIZE_OF, lambda);
+        Predicate<Map> lambda = m -> m == null || m.size() == limit;
+        addCheck("sizeOf", lambda);
         return this;
     }
 
     public MapSchema shape(Map<Object, BaseSchema> schemas) {
-        Predicate<Object> lambda = m -> schemas.entrySet().stream()
-                        .allMatch(o -> o.getValue().isValid(((Map) m).get(o.getKey())));
-        addCheck(CheckNames.SHAPE, lambda);
+        Predicate<Map> lambda = m -> schemas.entrySet().stream()
+                        .allMatch(o -> o.getValue().isValid((m).get(o.getKey())));
+        addCheck("shape", lambda);
         return this;
     }
 

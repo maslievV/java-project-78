@@ -33,7 +33,7 @@ public class StringValidationTest {
     public void containsTest() {
         var schema = VALIDATOR.string().contains("hello");
         assertTrue(schema.isValid("12356547hello"));
-        assertTrue(schema.isValid("123hello123"));
+        assertFalse(schema.isValid("123"));
     }
 
 }

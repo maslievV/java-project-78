@@ -5,24 +5,25 @@ import java.util.function.Predicate;
 public final class StringSchema extends BaseSchema {
 
     public StringSchema() {
-        Predicate<Object> lambda = x -> x instanceof String && !((String) x).isEmpty();
-        addCheck(CheckNames.REQUIRED, lambda);
+        Predicate<String> lambda = x -> x == null || x instanceof String;
+        addCheck("required", lambda);
     }
 
     public StringSchema required() {
-        required = true;
+        Predicate<String> lambda = x -> x != null && !x.isEmpty();
+        addCheck("required", lambda);
         return this;
     }
 
     public StringSchema minLength(int minLength) {
-        Predicate<Object> lambda = x -> x == null || ((String) x).length() >= minLength;
-        addCheck(CheckNames.MIN_LENGTH, lambda);
+        Predicate<String> lambda = x -> x == null || x.length() >= minLength;
+        addCheck("minLength", lambda);
         return this;
     }
 
     public StringSchema contains(String text) {
-        Predicate<Object> lambda = x -> x == null || ((String) x).contains(text);
-        addCheck(CheckNames.CONTAINS, lambda);
+        Predicate<String> lambda = x -> x == null || x.contains(text);
+        addCheck("contains", lambda);
         return this;
     }
 }
