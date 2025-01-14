@@ -11,7 +11,9 @@ public abstract class BaseSchema<T> {
     protected final void addCheck(String status, Predicate<T> pr) {
         checks.put(status, pr);
     }
-
+    /**
+     * BaseSchema method that checks value with null and can be used in other different schemas.
+     */
     public BaseSchema required() {
         Predicate<T> lambda = Objects::nonNull;
         addCheck("required", lambda);
