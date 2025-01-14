@@ -1,18 +1,24 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
-    private final Map<String, Predicate<Object>> checks = new TreeMap<>();
+    private final Map<String, Predicate<T>> checks = new TreeMap<>();
 
-    protected final void addCheck(String status, Predicate pr) {
+    protected final void addCheck(String status, Predicate<T> pr) {
         checks.put(status, pr);
     }
 
-    public final boolean isValid(Object value) {
+    public BaseSchema required() {
+        Predicate<T> lambda = Objects::nonNull;
+        addCheck("required", lambda);
+        return this;
+    }
 
+    public final boolean isValid(T value) {
         return checks.entrySet().stream()
                 .allMatch(l -> l.getValue().test(value));
     }

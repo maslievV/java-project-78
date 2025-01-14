@@ -20,6 +20,7 @@ public class StringValidationTest {
 
         assertFalse(schema.isValid(null));
         assertFalse(schema.isValid(""));
+        assertTrue(schema.isValid("123"));
     }
 
     @Test

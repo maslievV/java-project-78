@@ -2,12 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public final class StringSchema extends BaseSchema {
-
-    public StringSchema() {
-        Predicate<String> lambda = x -> x == null || x instanceof String;
-        addCheck("required", lambda);
-    }
+public final class StringSchema extends BaseSchema<String> {
 
     public StringSchema required() {
         Predicate<String> lambda = x -> x != null && !x.isEmpty();
