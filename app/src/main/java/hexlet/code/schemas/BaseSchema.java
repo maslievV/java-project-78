@@ -12,7 +12,7 @@ public abstract class BaseSchema<T> {
         checks.put(status, pr);
     }
     /**
-     * BaseSchema method that checks value with null and can be used in other different schemas.
+     * @return BaseSchema with not null check
      */
     public BaseSchema required() {
         Predicate<T> lambda = Objects::nonNull;
